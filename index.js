@@ -90,7 +90,7 @@ function getWeather(lat, long) {
 
 function getCityStateName(lat, long) {
     fetch(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=5&appid=${key}`
+        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=100&appid=${key}`
     )
         .then((response) => {
             return response.json();
