@@ -98,8 +98,6 @@ function getCityStateName(lat, long) {
             return response.json();
         })
         .then((data) => {
-            console.log(data)
-            console.log(data.features[0].properties.country)
             showCityStateName(data);
         })
         .catch((error) => {
@@ -113,8 +111,7 @@ function showCityStateName(data) {
     const country = data.features[0].properties.country;
     City.textContent = CityName;
     state.innerHTML = `${StateName}, ${country}`;
-    console.log(data);
-    console.log(country);
+    console.log(data)
 }
 
 function showWeather(data) {
