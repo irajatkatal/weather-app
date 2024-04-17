@@ -51,7 +51,6 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                console.log(position);
                 const lat = position.coords.latitude;
                 const long = position.coords.longitude;
                 // const lat = 43.683334;
@@ -93,13 +92,16 @@ function getCityStateName(lat, long) {
         `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=100&appid=${key}`
     )
         .then((response) => {
+            if(!response.ok){
+                throw new Error('Error while finding location')
+            }
             return response.json();
         })
         .then((data) => {
             showCityStateName(data);
         })
         .catch((error) => {
-            console.log(error);
+            console.error(error);
         });
 }
 
