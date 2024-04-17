@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace, Raleway, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url("images/david-marcu-78A265wPiO4-unsplash.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 85%;
+    height: 80%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.weatherDiv {
+    background-image: url("images/v2osk-1Z2niiBPg5A-unsplash.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 60%;
+    padding: 20px;
+}
+
+.dateTimePlaceDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 150px;
+}
+
+.dateTime {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    font-weight: 500;
+    color: #fff;
+    backdrop-filter: blur(10px);
+}
+
+.time {
+    font-size: 4rem;
+}
+
+.time span {
+    font-size: 2rem;
+}
+
+.date {
+    font-size: 1.2rem;
+}
+
+.place {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    padding: 30px;
+    font-weight: 550;
+    color: navy;
+    backdrop-filter: blur(10px);
+}
+
+.city {
+    text-align: right;
+    font-size: 2.5rem;
+}
+
+.state {
+    text-align: right;
+    font-size: 1.5rem;
+}
+
+.forCastDiv {
+    border: 2px solid;
+    width: 100%;
+    height: 40%;
+    backdrop-filter: blur(5px);
+}
