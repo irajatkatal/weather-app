@@ -89,7 +89,7 @@ function getWeather(lat, long) {
 
 function getCityStateName(lat, long) {
     fetch(
-        `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=100&appid=${key}`
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${long}&apiKey=4760db81a38f4ba6b696943ee6313191`
     )
         .then((response) => {
             if(!response.ok){
@@ -98,6 +98,8 @@ function getCityStateName(lat, long) {
             return response.json();
         })
         .then((data) => {
+            console.log(data)
+            console.log(data.features[0].properties.country)
             showCityStateName(data);
         })
         .catch((error) => {
@@ -106,9 +108,9 @@ function getCityStateName(lat, long) {
 }
 
 function showCityStateName(data) {
-    const CityName = data[0].name;
-    const StateName = data[0].state || CityName;
-    const country = data[0].country;
+    const CityName = data.features[0].properties.city;
+    const StateName = data.features[0].properties.state || CityName;
+    const country = data.features[0].properties.country;
     City.textContent = CityName;
     state.innerHTML = `${StateName}, ${country}`;
     console.log(data);
