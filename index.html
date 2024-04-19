@@ -3,30 +3,184 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Weather App</title>
+        <title>Today's Weather</title>
         <link rel="stylesheet" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
     </head>
     <body>
         <div class="wrapper">
-            <div class="weatherDiv">
-                <div class="dateTimePlaceDiv">
-                    <div class="dateTime">
-                        <div class="time"></div>
-                        <div class="date">Monday, 2 Feburary 2024</div>
+            <div class="weatherSection">
+                <div class="searchBar">
+                    <i
+                        id="searchIcons"
+                        class="bi bi-search"
+                        style="left: 12px"
+                    ></i>
+                    <input type="text" />
+                    <i
+                        id="searchIcons"
+                        class="bi bi-crosshair"
+                        style="right: 14px"
+                    ></i>
+                </div>
+                <div class="imgSectionLBig">
+                    <!-- <img src="" alt="logo" /> -->
+                </div>
+                <div class="tempratureLBig">
+                    <!-- <h2>12<sup>°C</sup></h2> -->
+                </div>
+                <div class="timeLBig">
+                    <!-- <h2>Monday, <span>04:00PM</span></h2> -->
+                </div>
+                <div class="weatherInfo">
+                    <div class="weatherInfoChildLBig">
+                        <!-- <img
+                            src="https://openweathermap.org/img/wn/04n@2x.png"
+                            alt=""
+                        /> -->
+                        <!-- <h2 class="sky">Mostly Cloudy</h2> -->
                     </div>
-                    <div class="place">
-                        <div class="city">Opps..</div>
-                        <div class="state"> </div>
+                    <div class="weatherInfoChild"></div>
+                </div>
+                <div class="cityImg">New York, NY, USA</div>
+            </div>
+            <div class="forCastSection">
+                <div class="today">
+                    <div class="week"><h2>Week</h2></div>
+                    <div class="degree">
+                        <div class="celcius active temp">°C</div>
+                        <div class="fehrnehite temp">°F</div>
+                    </div>
+                </div>
+                <div class="weeks">
+                    <div class="sunday weekday">
+                        <div class="name">Sun</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="monday weekday">
+                        <div class="name">Mon</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="tuesday weekday">
+                        <div class="name">Tue</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="wednesday weekday">
+                        <div class="name">Wed</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="thursday weekday">
+                        <div class="name">Thur</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="friday weekday">
+                        <div class="name">Fri</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                    <div class="saturday weekday">
+                        <div class="name">Sat</div>
+                        <div class="img">
+                            <img
+                                src="images/sun.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="temps"></div>
+                    </div>
+                </div>
+                <div class="highlights"><h2>Today's Highlights</h2></div>
+                <div class="cards">
+                    <div class="uvIndex myCards">
+                        <h2 class="cardH2">UV Index</h2>
+                    </div>
+                    <div class="windStatus myCards">
+                        <h2 class="cardH2">Wind Status</h2>
+                        <div class="myCardsData windSpeedData">
+                            <!-- <h2>7.70</h2> -->
+                            <!-- <span>KM/H</span> -->
+                        </div>
+                        <div class="windDirectionData myCardThirdDIv">
+                            <!-- <img
+                                src="/HTML/weather-app/images/navigation-SW.png"
+                                alt="North Logo"
+                            />
+                            <h2>NSW</h2> -->
+                        </div>
+                    </div>
+                    <div class="sunRiseSet myCards">
+                        <h2 class="cardH2">Sunrise And Sunset</h2>
+                        <div class="sunCardData rise">
+                            <!-- <h2>6:35<span>AM</span></h2> -->
+                        </div>
+                        <div class="sunCardData set">
+                            <!-- <h2>7:01<span>PM</span></h2> -->
+                        </div>
+                    </div>
+                    <div class="humidity myCards">
+                        <h2 class="cardH2">Humidity</h2>
+                        <div class="myCardsData humidityData">
+                            <!-- <h2>122%</h2> -->
+                        </div>
+                        <div class="myCardThirdDIv humidityDiv">
+                            <!-- <h2>Normal</h2> -->
+                        </div>
+                    </div>
+                    <div class="visibility myCards">
+                        <h2 class="cardH2">Visibility</h2>
+                        <div class="myCardsData visibilityData">
+                            <!-- <h2>100</h2>
+                            <span>KM</span> -->
+                        </div>
+                        <div class="windCondition myCardThirdDIv">
+                            <!-- <h2>Good 😊</h2> -->
+                        </div>
+                    </div>
+                    <div class="airQuality myCards">
+                        <h2 class="cardH2">Air Quality</h2>
                     </div>
                 </div>
             </div>
-            <div class="forCastDiv">
-                
-            </div>
-            <!-- <h1>Today</h1>
-            <h2 id="display"></h2>
-            <h2 id="error"></h2> -->
         </div>
+
         <script src="index.js"></script>
     </body>
 </html>

@@ -11,97 +11,345 @@
 
 body {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100vh;
-    background-image: url("images/david-marcu-78A265wPiO4-unsplash.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
+    align-items: center;
+    background-color: rgb(196, 197, 201);
+    min-width: 100%;
+    min-height: 100vh;
 }
 
 .wrapper {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 85%;
-    height: 80%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    align-items: start;
+    box-shadow: 0 0 4px rgb(255, 255, 255);
+    border-radius: 50px;
+    width: 80%;
+    height: 700px;
 }
 
-.weatherDiv {
-    background-image: url("images/v2osk-1Z2niiBPg5A-unsplash.jpg");
+.weatherSection {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding: 30px 30px;
+    width: 30%;
+    height: 100%;
+    border-radius: 50px 0 0 50px;
+    background-color: #fff;
+}
+
+.searchBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+input[type='text'] {
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2), 0px -2px 2px rgba(0, 0, 0, 0.2);
+    padding: 0 40px;
+    background-color: white;
+}
+
+#searchIcons {
+    position: absolute;
+}
+
+.imgSectionLBig {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    width: 200px;
+    height: 150px;
+    margin: 20px 0;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #ccc8c8;
+
+}
+
+.imgSectionLBig img {
+    width: 200px;
+}
+
+.tempratureLBig {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.tempratureLBig h2 {
+    font-size: 3em;
+    font-weight: 100;
+}
+
+.tempratureLBig h2 sup {
+    font-size: .4em;
+    font-weight: 400;
+}
+
+.timeLBig {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.timeLBig h2 {
+    font-size: 2em;
+    font-weight: 550;
+}
+
+.timeLBig h2 span {
+    font-size: 26px;
+    opacity: .75;
+}
+
+.weatherInfo {
+    margin: 10px 0;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.weatherInfo h2 {
+    margin: 10px;
+}
+
+.weatherInfoChildLBig {
+    width: 100%;
+    height: 60px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.weatherInfoChildLBig img {
+    border-radius: 50%;
+    background-color: #000;
+    width: 40px;
+}
+
+.weather {
+    width: 50px;
+}
+
+.cityImg {
+    background-image: url("images/colton-duke-UExx0KnnkjY-unsplash.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 60%;
-    padding: 20px;
+    height: 140px;
+    margin: 10px 0;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
 }
 
-.dateTimePlaceDiv {
+
+.forCastSection {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    padding: 30px 30px;
+    width: 70%;
+    height: 100%;
+    border-radius: 0 50px 50px 0;
+    background-color: rgba(246, 246, 248, .7);
+}
+
+.today {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 150px;
+    height: 60px;
+    margin: 10px 0;
+    padding: 0 40px;
 }
 
-.dateTime {
+
+.degree {
+    width: 100px;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+
+.temp {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    width: 40%;
-    height: 100%;
-    padding: 20px;
-    font-weight: 500;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px;
+}
+
+.active {
+    background-color: #000;
     color: #fff;
-    backdrop-filter: blur(10px);
 }
 
-.time {
-    font-size: 4rem;
-}
 
-.time span {
-    font-size: 2rem;
-}
-
-.date {
-    font-size: 1.2rem;
-}
-
-.place {
+.weeks {
     display: flex;
-    align-items: end;
-    flex-direction: column;
-    width: 40%;
-    height: 100%;
-    padding: 30px;
-    font-weight: 550;
-    color: navy;
-    backdrop-filter: blur(10px);
-}
-
-.city {
-    text-align: right;
-    font-size: 2.5rem;
-}
-
-.state {
-    text-align: right;
-    font-size: 1.5rem;
-}
-
-.forCastDiv {
-    border: 2px solid;
+    align-items: center;
+    justify-content: space-evenly;
     width: 100%;
-    height: 40%;
-    backdrop-filter: blur(5px);
+    height: 150px;
+    margin: 10px 0;
+}
+
+.weekday {
+    margin: 0 4px;
+    background-color: #fff;
+    width: 120px;
+    height: 150px;
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 1);
+}
+
+.name {
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.weekday .img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+}
+
+.img img {
+    width: 60px;
+}
+
+.highlights {
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1fr, 3);
+    grid-gap: 20px;
+}
+
+.myCards {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 10px 20px;
+    background-color: #fff;
+    width: 250px;
+    height: 170px;
+    border-radius: 20px;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.cardH2 {
+    padding: 10px 0;
+    font-size: 1.2em;
+    opacity: .75;
+}
+
+.myCardsData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 65px;
+}
+
+.myCardsData h2 {
+    font-size: 3em;
+    font-weight: 600;
+}
+
+.myCardsData span {
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.myCardThirdDIv {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 20px;
+}
+
+.myCardThirdDIv h2 {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.myCardThirdDIv img {
+    width: 24px;
+    margin: 0 10px 0 0;
+}
+
+.sunCardData {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    
+}
+
+.sunCardData::before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 12px;
+    left: 24px;
+    border-radius: 50%;
+    background-color: orangered;
+    color: #fff;
+}
+
+.rise::before {
+    content: "↑";
+    font-size: 1.5em;
+}
+
+.set::before {
+    content: "↓";
+    font-size: 1.5em;
+}
+
+.sunCardData h2 {
+    font-size: 1.5em;
+}
+
+.sunCardData h2 Span {
+    font-size: .7em;
 }
