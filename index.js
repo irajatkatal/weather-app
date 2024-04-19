@@ -41,10 +41,10 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                // const lat = position.coords.latitude;
-                // const long = position.coords.longitude;
-                const lat = 32.2733;
-                const long = 75.6522;
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                // const lat = 32.2733;
+                // const long = 75.6522;
                 getWeather(lat, long);
 
                 // getCityStateName(lat, long);
@@ -136,6 +136,8 @@ function showWeather(data, time) {
     const humidityDivMsg = document.createElement("h2");
     humidityDivMsg.textContent = humidityMsg;
     humidityDiv.appendChild(humidityDivMsg);
+
+    console.log(data)
 }
 
 function capitalizeEachWord(str) {
