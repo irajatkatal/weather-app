@@ -242,10 +242,12 @@ function degreesToDirection(degree) {
     };
 
     const windDirectionDataImg = document.createElement("img");
-    windDirectionDataImg.src = `/HTML/weather-app/images/${logo[direction]}`;
+    windDirectionDataImg.src = `images/${logo[direction]}`;
     windDirectionData.appendChild(windDirectionDataImg);
 
     const windDirectionDataH2 = document.createElement("h2");
     windDirectionDataH2.textContent = direction;
     windDirectionData.appendChild(windDirectionDataH2);
 }
+
+
