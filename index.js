@@ -252,7 +252,7 @@ function degreesToDirection(degree) {
         NW: "navigation-W.png",
         NNW: "navigation-NW.png",
     };
-
+    console.log()
     windDirectionData.children[0].src = `images/${logo[direction]}`;
     windDirectionData.children[1].innerHTML = direction;
 }
