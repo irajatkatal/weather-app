@@ -152,8 +152,15 @@ input[type='text'] {
     height: 140px;
     margin: 10px 0;
     border-radius: 20px;
-    color: #fff;
+    
+    
+}
+
+.cityImg h2{
+    padding: 0 10px;
     font-size: 20px;
+    color: #730b0b;
+    backdrop-filter: blur(10px);
 }
 
 

@@ -12,6 +12,10 @@ const humidityData = document.querySelector(".humidityData");
 const humidityCondition = document.querySelector(".humidityCondition");
 const airqualityCondition = document.querySelector(".airqualityCondition");
 const temp = document.querySelectorAll(".temp");
+const cityImg = document.querySelectorAll(".cityImg");
+
+let sunSetRiseTime;
+let todayWeekDay;
 
 // const windDirectionImg = document.querySelector(".windDirection img");
 
@@ -39,19 +43,18 @@ const monthsName = [
     "December",
 ];
 
-// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const lat = position.coords.latitude;
-                const long = position.coords.longitude;
-                
+                // const lat = position.coords.latitude;
+                // const long = position.coords.longitude;
+                const lat = 32.189996339240345;
+                const long = 75.46681960190939;
                 getWeather(lat, long);
                 getAirPolutionData(lat, long);
-
-                // getCityStateName(lat, long);
+                fetchDataForCast(lat, long);
+                getCityStateName(lat, long);
             },
             (error) => {
                 console.log(`Error: ${error.message}`);
@@ -63,6 +66,29 @@ function getLocation() {
 }
 
 getLocation();
+
+function getCityStateName(lat, long) {
+
+
+
+    fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyC8BQunnnWsGHxp68RPNNxsG1am6jaBN3A`
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            // showCityCounName(data);
+        })
+        .catch((error) => console.log(error));
+}
+
+function showCityCounName(data) {
+    console.log(cityImg[0].children[0].innerHTML);
+    let CityName = data.features[0].properties.city;
+    let StateCode = data.features[0].properties.state_code;
+    let country_code = data.features[0].properties.country_code.toUpperCase();
+    cityImg[0].children[0].innerHTML = `${CityName}, ${StateCode}, ${country_code}`;
+}
 
 function getWeather(lat, long) {
     fetch(
@@ -128,14 +154,14 @@ function showWeather(data) {
         )}<sup>°F</sup>`;
     });
 
-    let sunRiseDataAPi = getSunRiseSetData(data.sys.sunrise * 1000);
+    getSunRiseSetData(data.sys.sunrise * 1000);
     const setH2 = document.createElement("h2");
-    setH2.innerHTML = `${sunRiseDataAPi}<span>AM</span>`;
+    setH2.innerHTML = `${sunSetRiseTime}<span>AM</span>`;
     sunCardData[0].appendChild(setH2);
 
-    let sunSetDataAPi = getSunRiseSetData(data.sys.sunset * 1000);
+    getSunRiseSetData(data.sys.sunset * 1000);
     const riseH2 = document.createElement("h2");
-    riseH2.innerHTML = `${sunSetDataAPi}<span>PM</span>`;
+    riseH2.innerHTML = `${sunSetRiseTime}<span>PM</span>`;
     sunCardData[1].appendChild(riseH2);
 
     let visibilityCondition = visibilityMsg(data.visibility);
@@ -194,9 +220,10 @@ function getHumidityDescription(humidity) {
 
 function getSunRiseSetData(RiseSetdata) {
     const RSData = new Date(RiseSetdata);
-    return `${RSData.getHours() % 12 || 12}:${RSData.getMinutes()
+    sunSetRiseTime = `${RSData.getHours() % 12 || 12}:${RSData.getMinutes()
         .toString()
         .padEnd(2, 0)}`;
+    todayWeekDay = `${RSData.getDay()}`;
 }
 
 function currentTime() {
@@ -252,7 +279,7 @@ function degreesToDirection(degree) {
         NW: "navigation-W.png",
         NNW: "navigation-NW.png",
     };
-    console.log()
+    console.log();
     windDirectionData.children[0].src = `images/${logo[direction]}`;
     windDirectionData.children[1].innerHTML = direction;
 }
@@ -266,9 +293,9 @@ function getAirPolutionData(lat, long) {
         })
         .then((data) => {
             let airQualityMsg = getAirQualityDescription(data.list[0].main.aqi);
-            airqualityCondition.children[0].innerHTML = airQualityMsg
+            airqualityCondition.children[0].innerHTML = airQualityMsg;
             setInterval(() => {
-                airqualityCondition.children[0].innerHTML = airQualityMsg
+                airqualityCondition.children[0].innerHTML = airQualityMsg;
             });
         })
         .catch((error) => {
@@ -292,3 +319,29 @@ function getAirQualityDescription(aqi) {
     }
 }
 
+function fetchDataForCast(lat, long) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`
+    )
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            // logicBuld(data);
+            // forCastWeather(data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+// function logicBuld(data) {
+// console.log(data.list[0].dt);
+// getSunRiseSetData(data.list[0].dt*1000)
+// console.log(todayWeekDay)
+// }
+
+// function forCastWeather(data){
+//     getSunRiseSetData(data.list[0].dt*1000)
+
+// }
