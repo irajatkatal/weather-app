@@ -45,10 +45,10 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                // const lat = position.coords.latitude;
-                // const long = position.coords.longitude;
-                const lat = 32.19000201389952;
-                const long = 75.46681021437034;
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                // const lat = 32.19000201389952;
+                // const long = 75.46681021437034;
                 getWeather(lat, long);
                 getAirPolutionData(lat, long);
 
