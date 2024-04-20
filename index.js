@@ -9,7 +9,9 @@ const visibilityData = document.querySelector(".visibilityData");
 const windCondition = document.querySelector(".windCondition");
 const sunCardData = document.querySelectorAll(".sunCardData");
 const humidityData = document.querySelector(".humidityData");
-const humidityDiv = document.querySelector(".humidityDiv");
+const humidityCondition = document.querySelector(".humidityCondition");
+const airqualityCondition = document.querySelector(".airqualityCondition");
+const temp = document.querySelectorAll(".temp");
 
 // const windDirectionImg = document.querySelector(".windDirection img");
 
@@ -37,15 +39,18 @@ const monthsName = [
     "December",
 ];
 
+// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const lat = position.coords.latitude;
-                const long = position.coords.longitude;
-                // const lat = 32.2733;
-                // const long = 75.6522;
+                // const lat = position.coords.latitude;
+                // const long = position.coords.longitude;
+                const lat = 32.19000201389952;
+                const long = 75.46681021437034;
                 getWeather(lat, long);
+                getAirPolutionData(lat, long);
 
                 // getCityStateName(lat, long);
             },
@@ -71,7 +76,7 @@ function getWeather(lat, long) {
             return response.json();
         })
         .then((data) => {
-            setInterval(() => {}, 1000);
+            console.log(data);
             showWeather(data);
         })
         .catch((error) => {
@@ -79,11 +84,26 @@ function getWeather(lat, long) {
         });
 }
 
-function showWeather(data, time) {
+function showWeather(data) {
     const imgSectionLBigImg = document.createElement("img");
     imgSectionLBigImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     imgSectionLBigImg.alt = "Weather Logo";
     imgSectionLBig.appendChild(imgSectionLBigImg);
+
+    temp[0].addEventListener("click", () => {
+        temp[1].classList.remove("active");
+        temp[0].classList.add("active");
+        tempratureLBig.children[0].innerHTML = `${Math.round(
+            data.main.temp - 273.15
+        )}<sup>°C</sup>`;
+    });
+    temp[1].addEventListener("click", () => {
+        temp[0].classList.remove("active");
+        temp[1].classList.add("active");
+        tempratureLBig.children[0].innerHTML = `${Math.round(
+            ((data.main.temp - 273.15) * 9) / 5 + 32
+        )}<sup>°F</sup>`;
+    });
 
     const tempratureLBigH2 = document.createElement("h2");
     tempratureLBigH2.innerHTML = `${Math.round(
@@ -105,16 +125,6 @@ function showWeather(data, time) {
         Math.round(data.wind.speed * 3.6) + "<span>KM/H</span>";
     windSpeedData.appendChild(windSpeedDataH2);
 
-    let visibilityCondition = visibilityMsg(data.visibility);
-
-    const visibilityDataH2 = document.createElement("h2");
-    visibilityDataH2.innerHTML =
-        Math.round(data.visibility / 1000) + "<span>KM</span>";
-    visibilityData.appendChild(visibilityDataH2);
-
-    const windConditionH2 = document.createElement("h2");
-    windConditionH2.textContent = visibilityCondition;
-    windCondition.appendChild(windConditionH2);
     degreesToDirection(data.wind.deg);
 
     let sunRiseDataAPi = getSunRiseSetData(data.sys.sunrise * 1000);
@@ -131,13 +141,23 @@ function showWeather(data, time) {
     let humidityLevel = data.main.humidity;
     humidityDataH2.textContent = `${humidityLevel}%`;
     humidityData.appendChild(humidityDataH2);
+
     let humidityMsg = getHumidityDescription(humidityLevel);
 
     const humidityDivMsg = document.createElement("h2");
     humidityDivMsg.textContent = humidityMsg;
-    humidityDiv.appendChild(humidityDivMsg);
+    humidityCondition.appendChild(humidityDivMsg);
 
-    console.log(data)
+    let visibilityCondition = visibilityMsg(data.visibility);
+
+    const visibilityDataH2 = document.createElement("h2");
+    visibilityDataH2.innerHTML =
+        Math.round(data.visibility / 1000) + "<span>KM</span>";
+    visibilityData.appendChild(visibilityDataH2);
+
+    const windConditionH2 = document.createElement("h2");
+    windConditionH2.textContent = visibilityCondition;
+    windCondition.appendChild(windConditionH2);
 }
 
 function capitalizeEachWord(str) {
@@ -184,7 +204,9 @@ function getHumidityDescription(humidity) {
 
 function getSunRiseSetData(RiseSetdata) {
     const RSData = new Date(RiseSetdata);
-    return `${RSData.getHours() % 12 || 12}:${RSData.getMinutes()}`;
+    return `${RSData.getHours() % 12 || 12}:${RSData.getMinutes()
+        .toString()
+        .padEnd(2, 0)}`;
 }
 
 function currentTime() {
@@ -250,4 +272,40 @@ function degreesToDirection(degree) {
     windDirectionData.appendChild(windDirectionDataH2);
 }
 
+function getAirPolutionData(lat, long) {
+    fetch(
+        `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${apiKey}`
+    )
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            let airQualityMsg = getAirQualityDescription(data.list[0].main.aqi);
+            showAQICondition(airQualityMsg);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
+function getAirQualityDescription(aqi) {
+    if (aqi == 1) {
+        return "Good";
+    } else if (aqi == 2) {
+        return "Fair";
+    } else if (aqi == 3) {
+        return "Moderate";
+    } else if (aqi == 4) {
+        return "Poor";
+    } else if (aqi == 5) {
+        return "Very Poor";
+    } else {
+        return "Severe";
+    }
+}
+
+function showAQICondition(msg) {
+    const airqualityConditionH2 = document.createElement("h2");
+    airqualityConditionH2.textContent = msg;
+    airqualityCondition.appendChild(airqualityConditionH2);
+}
