@@ -47,8 +47,7 @@ function getLocation() {
             (position) => {
                 const lat = position.coords.latitude;
                 const long = position.coords.longitude;
-                // const lat = 32.19000201389952;
-                // const long = 75.46681021437034;
+                
                 getWeather(lat, long);
                 getAirPolutionData(lat, long);
 
@@ -76,20 +75,44 @@ function getWeather(lat, long) {
             return response.json();
         })
         .then((data) => {
-            console.log(data);
             showWeather(data);
+            setInterval(() => {
+                updatingData(data);
+            }, 60 * 1000);
+            updatingData(data);
         })
         .catch((error) => {
             console.log(error);
         });
 }
 
-function showWeather(data) {
-    const imgSectionLBigImg = document.createElement("img");
-    imgSectionLBigImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-    imgSectionLBigImg.alt = "Weather Logo";
-    imgSectionLBig.appendChild(imgSectionLBigImg);
+function updatingData(data) {
+    imgSectionLBig.children[0].src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
+    tempratureLBig.children[0].innerHTML = `${Math.round(
+        data.main.temp - 273.15
+    )}<sup>°C</sup>`;
+
+    weatherInfoChildLBig.children[0].src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
+    weatherInfoChildLBig.children[1].innerHTML = capitalizeEachWord(
+        data.weather[0].description
+    );
+
+    windSpeedData.children[0].innerHTML =
+        Math.round(data.wind.speed * 3.6) + "<span>KM/H</span>";
+
+    degreesToDirection(data.wind.deg);
+
+    let humidityLevel = data.main.humidity;
+    humidityData.children[0].innerHTML = `${humidityLevel}%`;
+
+    let humidityMsg = getHumidityDescription(humidityLevel);
+
+    humidityCondition.children[0].innerHTML = humidityMsg;
+}
+
+function showWeather(data) {
     temp[0].addEventListener("click", () => {
         temp[1].classList.remove("active");
         temp[0].classList.add("active");
@@ -105,28 +128,6 @@ function showWeather(data) {
         )}<sup>°F</sup>`;
     });
 
-    const tempratureLBigH2 = document.createElement("h2");
-    tempratureLBigH2.innerHTML = `${Math.round(
-        data.main.temp - 273.15
-    )}<sup>°C</sup>`;
-    tempratureLBig.appendChild(tempratureLBigH2);
-
-    const weatherInfoChildLBigImg = document.createElement("img");
-    weatherInfoChildLBigImg.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-    weatherInfoChildLBig.appendChild(weatherInfoChildLBigImg);
-
-    const weatherInfoChildLBigH2 = document.createElement("h2");
-    const outputString = capitalizeEachWord(data.weather[0].description);
-    weatherInfoChildLBigH2.textContent = outputString;
-    weatherInfoChildLBig.appendChild(weatherInfoChildLBigH2);
-
-    const windSpeedDataH2 = document.createElement("h2");
-    windSpeedDataH2.innerHTML =
-        Math.round(data.wind.speed * 3.6) + "<span>KM/H</span>";
-    windSpeedData.appendChild(windSpeedDataH2);
-
-    degreesToDirection(data.wind.deg);
-
     let sunRiseDataAPi = getSunRiseSetData(data.sys.sunrise * 1000);
     const setH2 = document.createElement("h2");
     setH2.innerHTML = `${sunRiseDataAPi}<span>AM</span>`;
@@ -136,17 +137,6 @@ function showWeather(data) {
     const riseH2 = document.createElement("h2");
     riseH2.innerHTML = `${sunSetDataAPi}<span>PM</span>`;
     sunCardData[1].appendChild(riseH2);
-
-    const humidityDataH2 = document.createElement("h2");
-    let humidityLevel = data.main.humidity;
-    humidityDataH2.textContent = `${humidityLevel}%`;
-    humidityData.appendChild(humidityDataH2);
-
-    let humidityMsg = getHumidityDescription(humidityLevel);
-
-    const humidityDivMsg = document.createElement("h2");
-    humidityDivMsg.textContent = humidityMsg;
-    humidityCondition.appendChild(humidityDivMsg);
 
     let visibilityCondition = visibilityMsg(data.visibility);
 
@@ -263,13 +253,8 @@ function degreesToDirection(degree) {
         NNW: "navigation-NW.png",
     };
 
-    const windDirectionDataImg = document.createElement("img");
-    windDirectionDataImg.src = `images/${logo[direction]}`;
-    windDirectionData.appendChild(windDirectionDataImg);
-
-    const windDirectionDataH2 = document.createElement("h2");
-    windDirectionDataH2.textContent = direction;
-    windDirectionData.appendChild(windDirectionDataH2);
+    windDirectionData.children[0].src = `images/${logo[direction]}`;
+    windDirectionData.children[1].innerHTML = direction;
 }
 
 function getAirPolutionData(lat, long) {
@@ -281,7 +266,10 @@ function getAirPolutionData(lat, long) {
         })
         .then((data) => {
             let airQualityMsg = getAirQualityDescription(data.list[0].main.aqi);
-            showAQICondition(airQualityMsg);
+            airqualityCondition.children[0].innerHTML = airQualityMsg
+            setInterval(() => {
+                airqualityCondition.children[0].innerHTML = airQualityMsg
+            });
         })
         .catch((error) => {
             console.log(error);
@@ -304,8 +292,3 @@ function getAirQualityDescription(aqi) {
     }
 }
 
-function showAQICondition(msg) {
-    const airqualityConditionH2 = document.createElement("h2");
-    airqualityConditionH2.textContent = msg;
-    airqualityCondition.appendChild(airqualityConditionH2);
-}
