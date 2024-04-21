@@ -47,10 +47,10 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                // const lat = position.coords.latitude;
-                // const long = position.coords.longitude;
-                const lat = 32.189996339240345;
-                const long = 75.46681960190939;
+                const lat = position.coords.latitude;
+                const long = position.coords.longitude;
+                // const lat = 35.689487;
+                // const long = 139.691706;
                 getWeather(lat, long);
                 getAirPolutionData(lat, long);
                 fetchDataForCast(lat, long);
@@ -79,8 +79,11 @@ function getCityStateName(lat, long) {
 }
 
 function showCityCounName(data) {
+    console.log(data);
     let CityName = data.features[0].properties.city;
-    let StateCode = data.features[0].properties.state_code;
+    let StateCode =
+        data.features[0].properties.state_code ||
+        data.features[0].properties.country;
     let country_code = data.features[0].properties.country_code.toUpperCase();
     cityImg[0].children[0].innerHTML = `${CityName}, ${StateCode}, ${country_code}`;
 }
