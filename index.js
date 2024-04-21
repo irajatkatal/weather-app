@@ -79,7 +79,8 @@ function getCityStateName(lat, long) {
 }
 
 function showCityCounName(data) {
-    let CityName = data.features[0].properties.city ||data.features[0].properties.state ;
+    let CityName =
+        data.features[0].properties.city || data.features[0].properties.state;
     let StateCode =
         data.features[0].properties.state_code ||
         data.features[0].properties.country;
@@ -303,17 +304,17 @@ function getAirPolutionData(lat, long) {
 
 function getAirQualityDescription(aqi) {
     if (aqi == 1) {
-        return "Good";
+        return "Good 😊";
     } else if (aqi == 2) {
-        return "Fair";
+        return "Fair 🙂";
     } else if (aqi == 3) {
-        return "Moderate";
+        return "Moderate 😐";
     } else if (aqi == 4) {
-        return "Poor";
+        return "Poor 😷";
     } else if (aqi == 5) {
-        return "Very Poor";
+        return "Very Poor 😰";
     } else {
-        return "Severe";
+        return "Severe 😨";
     }
 }
 
