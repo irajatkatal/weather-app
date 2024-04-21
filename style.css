@@ -14,17 +14,18 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgb(196, 197, 201);
-    min-width: 100%;
-    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
 }
 
 .wrapper {
     display: flex;
     align-items: start;
+    justify-content: center;
     box-shadow: 0 0 4px rgb(255, 255, 255);
     border-radius: 50px;
-    width: 80%;
-    height: 700px;
+    width: 1200px;
+    height: 650px;
 }
 
 .weatherSection {
@@ -33,7 +34,7 @@ body {
     justify-content: start;
     flex-direction: column;
     padding: 30px 30px;
-    width: 30%;
+    width: 350px;
     height: 100%;
     border-radius: 50px 0 0 50px;
     background-color: #fff;
@@ -68,21 +69,19 @@ input[type='text'] {
     align-items: center;
     justify-content: center;
     font-size: 5rem;
-    width: 200px;
-    height: 150px;
+    width: 100%;
+    height: 120px;
     margin: 20px 0;
-    border-radius: 50%;
-    text-align: center;
+    border-radius: 20px;
     background-color: #ccc8c8;
 
 }
 
 .imgSectionLBig img {
-    width: 200px;
+    width: 180px;
 }
 
 .tempratureLBig {
-    margin: 10px 0;
     width: 100%;
 }
 
@@ -152,11 +151,11 @@ input[type='text'] {
     height: 140px;
     margin: 10px 0;
     border-radius: 20px;
-    
-    
+
+
 }
 
-.cityImg h2{
+.cityImg h2 {
     padding: 0 10px;
     font-size: 20px;
     color: #730b0b;
@@ -169,8 +168,8 @@ input[type='text'] {
     align-items: center;
     justify-content: start;
     flex-direction: column;
-    padding: 30px 30px;
-    width: 70%;
+    padding: 20px;
+    width: 850px;
     height: 100%;
     border-radius: 0 50px 50px 0;
     background-color: rgba(246, 246, 248, .7);
@@ -182,8 +181,7 @@ input[type='text'] {
     justify-content: space-between;
     width: 100%;
     height: 60px;
-    margin: 10px 0;
-    padding: 0 40px;
+    padding: 2px 40px;
 }
 
 
@@ -217,7 +215,7 @@ input[type='text'] {
     align-items: center;
     justify-content: space-evenly;
     width: 100%;
-    height: 150px;
+    min-height: 140px;
     margin: 10px 0;
 }
 
@@ -225,7 +223,7 @@ input[type='text'] {
     margin: 0 4px;
     background-color: #fff;
     width: 120px;
-    height: 150px;
+    height: 100%;
     border-radius: 20px;
     box-shadow: 0 0 2px rgba(255, 255, 255, 1);
 }
@@ -235,7 +233,7 @@ input[type='text'] {
     width: 100%;
     border-radius: 20px;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -244,23 +242,24 @@ input[type='text'] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 60px;
+    height: 50px;
 }
 
 .img img {
-    width: 60px;
+    
+    width: 40px;
 }
 
 .highlights {
     width: 100%;
-    padding: 20px 40px;
+    padding: 15px 40px;
 }
 
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(1fr, 3);
-    grid-gap: 20px;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 
 .myCards {
@@ -271,7 +270,7 @@ input[type='text'] {
     padding: 10px 20px;
     background-color: #fff;
     width: 250px;
-    height: 170px;
+    height: 160px;
     border-radius: 20px;
     box-shadow: 0 0 2px rgba(255, 255, 255, 1);
     text-align: center;
@@ -279,7 +278,7 @@ input[type='text'] {
 
 .cardH2 {
     padding: 10px 0;
-    font-size: 1.2em;
+    font-size: 1em;
     opacity: .75;
 }
 
@@ -288,11 +287,11 @@ input[type='text'] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 65px;
+    height: 60px;
 }
 
 .myCardsData h2 {
-    font-size: 3em;
+    font-size: 2.2em;
     font-weight: 600;
 }
 
@@ -304,21 +303,20 @@ input[type='text'] {
 .myCardThirdDIv {
     display: flex;
     align-items: center;
-
     width: 100%;
     height: 40px;
-    padding: 0 20px;
+    padding-left: 2px;
     border-radius: 20px;
 }
 
 .myCardThirdDIv h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 550;
 }
 
 .myCardThirdDIv img {
     width: 24px;
-    margin: 0 10px 0 0;
+    margin-right: 10px;
 }
 
 .sunCardData {
@@ -327,7 +325,7 @@ input[type='text'] {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 50px;
+    height: 45px;
 
 }
 
@@ -359,4 +357,39 @@ input[type='text'] {
 
 .sunCardData h2 Span {
     font-size: .7em;
+}
+
+
+@media screen and (max-width: 1200px) {
+
+    /* CSS rules for extra large screens */
+    body {
+        padding: 40px;
+        align-items: start;
+    }
+
+    .wrapper {
+        width: 950px;
+    }
+
+    /* .weeks{
+        overflow-y: scroll;
+    } */
+
+}
+
+@media screen and (max-width: 992px) {
+    /* CSS rules for extra large screens */
+}
+
+@media screen and (max-width: 768px) {
+    /* CSS rules for extra large screens */
+}
+
+@media screen and (min-width: 1200px) {
+    /* CSS rules for extra large screens */
+}
+
+@media screen and (min-width: 1200px) {
+    /* CSS rules for extra large screens */
 }

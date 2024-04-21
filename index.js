@@ -12,7 +12,7 @@ const humidityData = document.querySelector(".humidityData");
 const humidityCondition = document.querySelector(".humidityCondition");
 const airqualityCondition = document.querySelector(".airqualityCondition");
 const temp = document.querySelectorAll(".temp");
-const cityImg = document.querySelectorAll(".cityImg");
+const cityImg = document.querySelector(".cityImg");
 
 let sunSetRiseTime;
 let todayWeekDay;
@@ -79,13 +79,13 @@ function getCityStateName(lat, long) {
 }
 
 function showCityCounName(data) {
-    console.log(data);
     let CityName = data.features[0].properties.city;
     let StateCode =
         data.features[0].properties.state_code ||
         data.features[0].properties.country;
     let country_code = data.features[0].properties.country_code.toUpperCase();
-    cityImg[0].children[0].innerHTML = `${CityName}, ${StateCode}, ${country_code}`;
+    cityImg.children[0].innerHTML = `${CityName}, ${StateCode}, ${country_code}`;
+    citySetter(data.features[0].properties.county);
 }
 
 function getWeather(lat, long) {
@@ -333,13 +333,19 @@ function fetchDataForCast(lat, long) {
         });
 }
 
-// function logicBuld(data) {
-// console.log(data.list[0].dt);
-// getSunRiseSetData(data.list[0].dt*1000)
-// console.log(todayWeekDay)
-// }
+function citySetter(data) {
+    fetch(
+        "https://api.unsplash.com/search/photos/?page=1&query=${data}&client_id=TJJvHZFA-RiLyA6fy2N6N36lTE7r7ZGGffWvoor1V9s"
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            changingBGImage(data);
+        })
+        .catch((error) => console.log(error));
+}
 
-// function forCastWeather(data){
-//     getSunRiseSetData(data.list[0].dt*1000)
-
-// }
+function changingBGImage(data) {
+    cityImg.style.backgroundImage = `url(${
+        data.results[Math.floor(Math.random() * 10)].urls.full
+    })`;
+}
