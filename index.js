@@ -68,16 +68,13 @@ function getLocation() {
 getLocation();
 
 function getCityStateName(lat, long) {
-
-
-
     fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyC8BQunnnWsGHxp68RPNNxsG1am6jaBN3A`
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${long}&apiKey=4760db81a38f4ba6b696943ee6313191`
     )
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
-            // showCityCounName(data);
+            console.log(data);
+            showCityCounName(data);
         })
         .catch((error) => console.log(error));
 }
@@ -286,7 +283,7 @@ function degreesToDirection(degree) {
 
 function getAirPolutionData(lat, long) {
     fetch(
-        `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=${apiKey}`
     )
         .then((response) => {
             return response.json();
