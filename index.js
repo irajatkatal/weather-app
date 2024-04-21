@@ -73,14 +73,12 @@ function getCityStateName(lat, long) {
     )
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             showCityCounName(data);
         })
         .catch((error) => console.log(error));
 }
 
 function showCityCounName(data) {
-    console.log(cityImg[0].children[0].innerHTML);
     let CityName = data.features[0].properties.city;
     let StateCode = data.features[0].properties.state_code;
     let country_code = data.features[0].properties.country_code.toUpperCase();
