@@ -79,13 +79,13 @@ function getCityStateName(lat, long) {
 }
 
 function showCityCounName(data) {
-    let CityName = data.features[0].properties.city;
+    let CityName = data.features[0].properties.city ||data.features[0].properties.state ;
     let StateCode =
         data.features[0].properties.state_code ||
         data.features[0].properties.country;
     let country_code = data.features[0].properties.country_code.toUpperCase();
     cityImg.children[0].innerHTML = `${CityName}, ${StateCode}, ${country_code}`;
-    citySetter(data.features[0].properties.county);
+    citySetter(data.features[0].properties.state);
 }
 
 function getWeather(lat, long) {
@@ -335,7 +335,7 @@ function fetchDataForCast(lat, long) {
 
 function citySetter(data) {
     fetch(
-        "https://api.unsplash.com/search/photos/?page=1&query=${data}&client_id=TJJvHZFA-RiLyA6fy2N6N36lTE7r7ZGGffWvoor1V9s"
+        `https://api.unsplash.com/search/photos/?page=1&query=${data}&client_id=TJJvHZFA-RiLyA6fy2N6N36lTE7r7ZGGffWvoor1V9s`
     )
         .then((response) => response.json())
         .then((data) => {
