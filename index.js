@@ -129,6 +129,8 @@ function updatingData(data) {
 
     degreesToDirection(data.wind.deg);
 
+    windDirectionData.children[0].style.transform = `rotate(${data.wind.deg}deg)`;
+
     let humidityLevel = data.main.humidity;
     humidityData.children[0].innerHTML = `${humidityLevel}%`;
 
@@ -258,29 +260,11 @@ function degreesToDirection(degree) {
         "NW",
         "NNW",
     ];
+
     const index = Math.round((degree % 360) / 22.5);
     const direction = directions[(index + 16) % 16];
-    const logo = {
-        N: "navigation-N.png",
-        NNE: "navigation-NE.png",
-        NE: "navigation-E.png",
-        ENE: "navigation-NE.png",
-        E: "navigation-E.png",
-        ESE: "navigation-SE.png",
-        SE: "navigation-E.png",
-        SSE: "navigation-SE.png",
-        S: "navigation-S.png",
-        SSW: "navigation-SW.png",
-        SW: "navigation-W.png",
-        WSW: "navigation-SW.png",
-        W: "navigation-W.png",
-        WNW: "navigation-NW.png",
-        NW: "navigation-W.png",
-        NNW: "navigation-NW.png",
-    };
-    console.log();
-    windDirectionData.children[0].src = `images/${logo[direction]}`;
     windDirectionData.children[1].innerHTML = direction;
+
 }
 
 function getAirPolutionData(lat, long) {
@@ -318,22 +302,6 @@ function getAirQualityDescription(aqi) {
     }
 }
 
-function fetchDataForCast(lat, long) {
-    fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`
-    )
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            // logicBuld(data);
-            // forCastWeather(data)
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
 function citySetter(data) {
     fetch(
         `https://api.unsplash.com/search/photos/?page=1&query=${data}&client_id=TJJvHZFA-RiLyA6fy2N6N36lTE7r7ZGGffWvoor1V9s`
@@ -349,4 +317,21 @@ function changingBGImage(data) {
     cityImg.style.backgroundImage = `url(${
         data.results[Math.floor(Math.random() * 10)].urls.full
     })`;
+}
+
+function fetchDataForCast(lat, long) {
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`
+    )
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            // console.log(data)
+            // logicBuld(data);
+            // forCastWeather(data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
