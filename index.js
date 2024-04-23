@@ -264,7 +264,6 @@ function degreesToDirection(degree) {
     const index = Math.round((degree % 360) / 22.5);
     const direction = directions[(index + 16) % 16];
     windDirectionData.children[1].innerHTML = direction;
-
 }
 
 function getAirPolutionData(lat, long) {
