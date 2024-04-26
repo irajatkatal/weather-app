@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgb(196, 197, 201);
-    width: 100%;
+    min-width: 100%;
     min-height: 100vh;
 }
 
@@ -24,8 +24,8 @@ body {
     justify-content: center;
     box-shadow: 0 0 4px rgb(255, 255, 255);
     border-radius: 50px;
-    width: 1200px;
-    height: 650px;
+    min-width: 1200px;
+    min-height: 650px;
 }
 
 .weatherSection {
